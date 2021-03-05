@@ -45,6 +45,7 @@ const Login: React.FC<Iprops> = props => {
             setLoading(true)
             let res = await getLogin({ username: username.val, password: password.val, code: code.val }) as Ilogin
             setLoading(false)
+            localStorage.setItem('userinfo', JSON.stringify({ sername: username.val, password: password.val }))
             props.setUserInfoMy({ username: username.val, password: password.val })
             notification.open({
                 message: 'SUCCESS',

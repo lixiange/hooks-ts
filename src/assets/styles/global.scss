@@ -1,0 +1,32 @@
+@mixin display_center($align: center, $justify: center, $direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin textoverflow($line:  2) {
+   word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: $line;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+}
+
+@mixin absolute($left:  0, $top:  0) {
+   position: absolute;
+    left: $left;
+    top: $top;
+}
+
+@mixin absolutecenter {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}
