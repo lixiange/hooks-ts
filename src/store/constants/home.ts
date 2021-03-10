@@ -1,1 +1,1 @@
-export const INFINISH='infinish'
+export const CHANGE_NUMBER_STATUS = 'changeNumberStatus' as string

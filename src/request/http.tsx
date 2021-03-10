@@ -1,21 +1,29 @@
-import axios from 'axios'
+import axios, { AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios'
 import config from '../config'
+
+
+interface ResponseData<T> {
+    code: number;
+    data: T;
+    msg: string;
+}
+
 const { requestConfig } = config
 const baseURL = requestConfig.apiBase;
 axios.defaults.timeout = requestConfig.timeout;//设置请求超时时间
-axios.interceptors.request.use((config) => {
+axios.interceptors.request.use((config: AxiosRequestConfig) => {
     config.headers["token"] = localStorage.getItem("token");
     return config
 },
-    (error) => {
+    (error: AxiosError) => {
         return Promise.reject(error)
     }
 );
 axios.interceptors.response.use(
-    (response) => {
+    (response: AxiosResponse<ResponseData<any>>) => {
         return response
     },
-    (error) => {
+    (error: AxiosError) => {
         const { response } = error;
         if (response) {
             return Promise.reject(response.data)
@@ -59,7 +67,7 @@ const get = (url: string, params: object) => {
             url,
             method: 'get',
             params: params
-        }).then(res => {
+        }).then((res) => {
             resolve(res.data)
         }).catch(error => {
             reject(error)

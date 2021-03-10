@@ -40,8 +40,7 @@ interface Iactions {
 export default function GetUserInfo(state = defaultState, action: Iactions): UserStateProps {
     switch (action.type) {
         case GET_UESR_INFO:
-            console.log('daozhel')
-            console.log(JSON.stringify(action.value))
+
             const obj: UserStateProps = state
             return { userinfo: { ...obj.userinfo, ...action.value } }
         default:

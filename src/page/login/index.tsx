@@ -4,23 +4,18 @@ import { StoreState } from '../../store'
 import { setUserInfo } from '../../store/actions'
 import { useInput } from '../../hooks'
 import './style.scss'
-import { Button, Tooltip, Input, message, InputProps, notification } from 'antd'
-import { GithubOutlined, UserOutlined, LockOutlined, PictureOutlined } from '@ant-design/icons'
+import { Button, Input, notification } from 'antd'
+import { UserOutlined, LockOutlined, PictureOutlined } from '@ant-design/icons'
 import { RouteComponentProps, useHistory } from 'react-router-dom'
-import { getCaptcha, getLogin } from '../../request/api'
-import { getRandom } from '../../utils'
-import { Ilogin } from '../../types/global.d'
+import { getLogin, getCaptcha } from '../../request/api'
+import { ResponseData, Ilogin, IgetCaptcha } from '../../types'
 import sh from '../../assets/img/sh.png'
 import codesp from '../../assets/img/code.webp'
 
-interface Iprops extends RouteComponentProps {
-    setUserInfoMy: any
-}
-export interface IloginParams {
-    username: string,
-    password: string,
-    code: string
-}
+type MapStateToProps = Readonly<ReturnType<typeof mapStateToProps>>
+type MapDispatchToProps = Readonly<ReturnType<typeof mapDispatchToProps>>
+type Iprops = MapDispatchToProps & MapStateToProps & RouteComponentProps
+
 const Login: React.FC<Iprops> = props => {
     const history = useHistory()
     const username = useInput("")
@@ -43,7 +38,7 @@ const Login: React.FC<Iprops> = props => {
     const handleSubmit = useCallback(async () => {
         try {
             setLoading(true)
-            let res = await getLogin({ username: username.val, password: password.val, code: code.val }) as Ilogin
+            let res = await getLogin({ username: username.val, password: password.val, code: code.val }) as ResponseData<Ilogin>
             setLoading(false)
             localStorage.setItem('userinfo', JSON.stringify({ sername: username.val, password: password.val }))
             props.setUserInfoMy({ username: username.val, password: password.val })
@@ -63,7 +58,7 @@ const Login: React.FC<Iprops> = props => {
                 duration: 1,
             });
         }
-    }, [code.val, history, password.val, username.val])
+    }, [code.val, history, password.val, props, username.val])
 
     const pressEnter = useCallback((inputType: string) => {
         switch (inputType) {
@@ -155,6 +150,11 @@ const Login: React.FC<Iprops> = props => {
     </section>
 }
 
+const mapStateToProps = (state: StoreState) => {
+    return {
+
+    }
+}
 const mapDispatchToProps = (dispatch: any) => {
     return {
         setUserInfoMy: (res: object) => {
@@ -162,4 +162,4 @@ const mapDispatchToProps = (dispatch: any) => {
         }
     }
 }
-export default connect(null, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
