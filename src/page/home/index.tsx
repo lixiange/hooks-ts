@@ -20,9 +20,13 @@ type Iprops = defaultProps & MapStateToProps & MapDispatchToProps & RouteCompone
 
 const Home: React.FC<Iprops> = props => {
     const [user, setUser] = useState('')
+    const [Index, setIndex] = useState(0);
 
     useEffect(() => {
         //兼顾中西，西文在前，中文在后
+        setIndex(pre=>
+            pre + 1
+        )
     })
     return <div >
 
