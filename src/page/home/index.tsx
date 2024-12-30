@@ -4,7 +4,6 @@ import { changeNumberStatus } from '../../store/actions'
 import { StoreState } from '../../store'
 import { RouteComponentProps } from 'react-router-dom'
 import './style.scss'
-import Img from '../../assets/img/code.webp'
 
 
 interface defaultProps {
