@@ -10,10 +10,7 @@ interface defaultProps {
     name: string
 
 }
-type User = {
-    name: string,
-    age: number
-}
+
 type MapStateToProps = Readonly<ReturnType<typeof mapStateToProps>>
 type MapDispatchToProps = Readonly<ReturnType<typeof mapDispatchToProps>>
 type Iprops = defaultProps & MapStateToProps & MapDispatchToProps & RouteComponentProps
@@ -25,7 +22,7 @@ const Home: React.FC<Iprops> = props => {
     useEffect(() => {
         //兼顾中西，西文在前，中文在后
         setIndex(pre=>
-            pre + 1
+            pre + 2
         )
     })
     return <div >
