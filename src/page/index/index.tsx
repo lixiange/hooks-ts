@@ -51,7 +51,7 @@ const Protal: React.FC<PortalProps> = (props) => {
       </div>
       <div className="title">React-admin</div>
       <p>标准TS + Hooks分层结构，react16、router4、antd4、webpack4、ES6+、TS、Hooks</p>
-      <p>后台管理系统模块，后台管理系统模块1</p>
+      <p>后台管理系统模块，后111台管理系统模块1</p>
       <p>master分支中修改内容</p>
     </div>
   )
